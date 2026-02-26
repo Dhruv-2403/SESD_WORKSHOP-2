@@ -34,4 +34,32 @@ program.command("joke").description("random joke").action(async()=>{
         console.log(err)
     }
 })
+
+program.command("quote").description("quote generator").action(async()=>{
+    try{
+        const q=await axios.get("https://zenquotes.io/api/random")
+        console.log(q.data[0].q)
+
+    } catch(err){
+        console.log(err)
+
+    }
+})
+
+program.command("pokemon <name>").description("pokemon info").action(async(name)=>{
+    try{
+
+
+
+        const pokemon=await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+        // console.log(pokemon.data)
+        console.log(pokemon.data.moves.version_group_details)
+        console.log(pokemon.data.stats)
+        console.log(pokemon.data.name)
+       
+    }catch(err){
+
+        console.log(err)
+    }
+})
 program.parse()
